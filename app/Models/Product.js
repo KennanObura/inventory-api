@@ -8,6 +8,10 @@ class Product extends Model {
         return this.belongsTo('App/Models/Supplier');
     }
 
+    productQuantity(){
+        return this.hasMany('App/Models/ProductQuantity')
+    }
+
     // static get dates () {
     //     return super.dates.concat(['prod_yom'])
     //   }
