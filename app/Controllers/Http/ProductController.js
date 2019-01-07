@@ -5,6 +5,7 @@
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
 const Product = use('App/Models/Product');
+const Database = use('Database')
 
 /**
  * Resourceful controller for interacting with products
@@ -20,11 +21,11 @@ class ProductController {
    * @param {View} ctx.view
    */
   async index({ request, response, view }) {
-    let products = await Product.all()
-   
+    let products = await Database
+    .select('*')
+    .from('products')
 
-    // await products
-    // .leftJoin('suppliers', 'suppliers.id', 'products.supplier_id')
+    .leftJoin('suppliers', 'suppliers.id', 'products.supplier_id')
     return response.json(products)
   }
 

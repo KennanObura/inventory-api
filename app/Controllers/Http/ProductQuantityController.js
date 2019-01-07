@@ -4,6 +4,9 @@
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
+
+const ProductQuantity = use('App/Models/ProductQuantity')
+const Database = use('Database')
 /**
  * Resourceful controller for interacting with productquantities
  */
@@ -17,7 +20,10 @@ class ProductQuantityController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async index ({ request, response, view }) {
+  async index({ request, response, view }) {
+    const data = await Database.raw('select * from product_quantities')
+    return response.json(data)
+
   }
 
   /**
@@ -29,7 +35,7 @@ class ProductQuantityController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async create ({ request, response, view }) {
+  async create({ request, response, view }) {
   }
 
   /**
@@ -40,7 +46,17 @@ class ProductQuantityController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async store ({ request, response }) {
+  async store({ request, response }) {
+    const stock = request.input('stock')
+    const product_id = request.input('product_id')
+
+    let productQuantity = new ProductQuantity()
+    productQuantity.stock = stock
+    productQuantity.product_id = product_id
+
+    await productQuantity.save()
+    return response.json(productQuantity)
+
   }
 
   /**
@@ -52,7 +68,7 @@ class ProductQuantityController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async show ({ params, request, response, view }) {
+  async show({ params, request, response, view }) {
   }
 
   /**
@@ -64,7 +80,7 @@ class ProductQuantityController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async edit ({ params, request, response, view }) {
+  async edit({ params, request, response, view }) {
   }
 
   /**
@@ -75,7 +91,20 @@ class ProductQuantityController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async update ({ params, request, response }) {
+  async update({ params, request, response }) {
+
+
+
+    let quantity = await ProductQuantity.findBy('product_id', params.id)
+    // let productQuantity = new ProductQuantity()
+
+    return quantity.stock - 1
+   
+    // productQuantity.stock = (quantity.stock - 1)
+    // productQuantity.product_id = params.id
+
+    // await productQuantity.save()
+    // return response.json(productQuantity)
   }
 
   /**
@@ -86,7 +115,7 @@ class ProductQuantityController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async destroy ({ params, request, response }) {
+  async destroy({ params, request, response }) {
   }
 }
 
