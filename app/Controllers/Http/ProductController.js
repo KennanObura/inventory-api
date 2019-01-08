@@ -21,11 +21,20 @@ class ProductController {
    * @param {View} ctx.view
    */
   async index({ request, response, view }) {
+
+    const quantity =  await Database
+    .select('stock')
+    .from('product_quantities')
+    .where({ product_id: 'products.id' })
+    .orderBy('id', 'desc')
+    .limit(1)
+
+
     let products = await Database
     .select('*')
     .from('products')
-
     .leftJoin('suppliers', 'suppliers.id', 'products.supplier_id')
+    // .whereIn('id', quantity)
     return response.json(products)
   }
 

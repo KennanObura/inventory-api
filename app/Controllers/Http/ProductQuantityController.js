@@ -93,18 +93,20 @@ class ProductQuantityController {
    */
   async update({ params, request, response }) {
 
-
-
-    let quantity = await ProductQuantity.findBy('product_id', params.id)
-    // let productQuantity = new ProductQuantity()
-
-    return quantity.stock - 1
+    let quantity = await Database
+    .select('stock')
+    .from('product_quantities')
+    .where({ product_id: params.id })
+    .orderBy('id', 'desc')
+    .limit(1)
+    
+    let productQuantity = new ProductQuantity()
    
-    // productQuantity.stock = (quantity.stock - 1)
-    // productQuantity.product_id = params.id
+    productQuantity.stock = (quantity[0].stock - 1)
+    productQuantity.product_id = params.id
 
-    // await productQuantity.save()
-    // return response.json(productQuantity)
+    await productQuantity.save()
+    return response.json(productQuantity)
   }
 
   /**
