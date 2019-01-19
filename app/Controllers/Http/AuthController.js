@@ -23,7 +23,7 @@ class AuthController {
     }
 
 
-    async login({request, auth, response}){
+    async login({request, auth, response, view}){
         const email = request.input('email')
         const password = request.input('password')
 
@@ -32,11 +32,14 @@ class AuthController {
                 let user = await User.findBy('email', email)
 
                 let accessToken = await auth.generate(user)
-                return response.json({ "user": user, "access_token": accessToken })
+
+                return response.redirect('/home');
+                
+                // return response.json({ user: user, access_token: accessToken })
             }
    
         } catch (error) {
-            return response.json({ message: 'Sorry. You have no account!' })
+            return response.redirect('/');
         }
         
     }

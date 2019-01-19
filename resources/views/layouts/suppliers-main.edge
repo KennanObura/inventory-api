@@ -1,0 +1,47 @@
+@layout('layouts.main')
+
+
+  @section('main')
+  <div class="row">
+      <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Suppliers</h4>
+           
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Telephone</th>
+                    <th>Address</th>
+                    <th>Town</th>
+                    <th>Active Date</th>
+                    <th>Active Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                @each(supplier in suppliers)
+                  
+               
+                <tr id="{{supplier.id}}">
+                    <td>{{supplier.name}}</td>
+                    <td>{{supplier.tel}}</td>
+                    <td>{{supplier.address}}</td>
+                    <td>{{supplier.city}}</td>
+                    <td>{{supplier.created_at}}</td>
+
+                    <td class="text-success"> 98.05%
+                      <i class="mdi mdi-arrow-up"></i>
+                    </td>
+                   
+                  </tr>
+                  @endeach
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+      @endsection

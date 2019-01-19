@@ -16,23 +16,28 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
-Route.on('/').render('index')
+Route.on('/').render('landing')
+Route.on('/register').render('register')
+Route.on('/home').render('index')
 
-Route.post('/api/auth/register', 'AuthController.register')
-Route.post('/api/auth/login', 'AuthController.login')
+Route.post('/auth/register', 'AuthController.register')
+Route.post('/auth/login', 'AuthController.login')
 
-Route.get('/api/suppliers', 'SupplierController.index')
-Route.get('/api/suppliers/:id', 'SupplierController.show')
-Route.post('/api/suppliers', 'SupplierController.store')
-Route.put('/api/suppliers/:id', 'SupplierController.update')
-Route.delete('/api/suppliers/:id', 'SupplierController.destroy').middleware('auth')
-Route.get('/api/suppliers/products/:id', 'SupplierController.products')
+Route.get('/suppliers', 'SupplierController.index')
+Route.get('/suppliers/:id', 'SupplierController.show')
+Route.post('/suppliers', 'SupplierController.store')
+Route.put('/suppliers/:id', 'SupplierController.update')
+Route.delete('/suppliers/:id', 'SupplierController.destroy').middleware('auth')
+Route.get('/suppliers/products/:id', 'SupplierController.products')
 
 
-Route.get('/api/products', 'ProductController.index')
-Route.get('/api/products/:id', 'ProductController.show')
-Route.post('/api/products', 'ProductController.store')
-Route.get('/api/product/supplier/:id', 'ProductController.supplier')
+Route.get('/products', 'ProductController.index')
+Route.get('/products/:id', 'ProductController.show')
+Route.post('/products/:id', 'ProductController.update')
+Route.get('/product/edit/:id', 'ProductController.edit')
+Route.delete('/product/:id', 'ProductController.destroy')
+Route.post('/products', 'ProductController.store')
+Route.get('/product/supplier/:id', 'ProductController.supplier')
 
 Route.get('/api/productQuantity', 'ProductQuantityController.index')
 Route.post('/api/productQuantity', 'ProductQuantityController.store')

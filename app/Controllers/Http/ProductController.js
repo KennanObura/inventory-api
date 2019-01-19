@@ -22,20 +22,25 @@ class ProductController {
    */
   async index({ request, response, view }) {
 
-    const quantity =  await Database
-    .select('stock')
-    .from('product_quantities')
-    .where({ product_id: 'products.id' })
-    .orderBy('id', 'desc')
-    .limit(1)
+    // const quantity =  await Database
+    // .select('stock')
+    // .from('product_quantities')
+    // .where({ product_id: 'products.id' })
+    // .orderBy('id', 'desc')
+    // .limit(1)
 
 
-    let products = await Database
-    .select('*')
+    const products = await Database
+    .select('products.*','suppliers.name')
     .from('products')
     .leftJoin('suppliers', 'suppliers.id', 'products.supplier_id')
+
+
     // .whereIn('id', quantity)
-    return response.json(products)
+    // return response.json(products)
+    let results = products
+
+    return view.render('layouts.products-main', { products: results })
   }
 
   /**
@@ -104,6 +109,10 @@ class ProductController {
    * @param {View} ctx.view
    */
   async edit({ params, request, response, view }) {
+
+    const product = await Product.find(params.id)
+    // return response.json(product)
+    return view.render('layouts.products.edit', {product: product.toJSON()})
   }
 
   /**
@@ -115,6 +124,27 @@ class ProductController {
    * @param {Response} ctx.response
    */
   async update({ params, request, response }) {
+    const prod_name = request.input('prod_name')
+    const prod_coo = request.input('prod_coo')
+    const prod_yom = request.input('prod_yom')
+    const prod_quality = request.input('prod_quality')
+    const prod_patno = request.input('prod_patno')
+    const prod_model = request.input('prod_model')
+    const supplier_id = request.input('supplier_id')
+
+    let product = await Product.find(params.id)
+    product.prod_name = prod_name
+    product.prod_patno = prod_patno
+    product.prod_coo = prod_coo
+    product.prod_yom = prod_yom
+    product.prod_quality = prod_quality
+    product.supplier_id = supplier_id
+    product.prod_model = prod_model
+
+    await product.save()
+    
+    // session.flash({ message: 'Your job has been updated. '});
+    return response.redirect('/products');
   }
 
   /**
@@ -126,6 +156,9 @@ class ProductController {
    * @param {Response} ctx.response
    */
   async destroy({ params, request, response }) {
+    await Product.find(params.id).delete()
+
+    return response.redirect('/products')
   }
 
   async supplier({ params, request, response }){

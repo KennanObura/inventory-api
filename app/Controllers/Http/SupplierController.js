@@ -22,9 +22,13 @@ class SupplierController {
    * @param {View} ctx.view
    */
   async index({ request, response, view }) {
+
+    
     let suppliers = await Supplier.all()
 
-    return response.json(suppliers)
+    // return response.json(suppliers)
+    return view.render('layouts.suppliers-main', { suppliers: suppliers.toJSON() })
+    
   }
 
   /**

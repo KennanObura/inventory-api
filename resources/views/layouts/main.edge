@@ -1,19 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Hello Adonis</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-  {{ style('style') }}
-  {{ style('dashboard')}}
-</head>
-@include('layouts.partials.nav')
-    <body>
-        <main role="main">
-            @!section('main')
-              
-        </main>
+@include('layouts.partials.header')
 
-        @include('layouts.partials.common-scripts')
+    <body>
+            <div class="container-scroller">
+
+                   @include('layouts.partials.nav')
+
+                   
+                    <div class="container-fluid page-body-wrapper">
+                      
+                        @include('layouts.partials.side-menu')
+                      <div class="main-panel">
+                        
+                            @!section('main')
+  
+
+                    
+                        @include('layouts.partials.footer')
+                      </div>
+                    
+                    </div>
+                    
+                  </div> 
     </body>
+  @include('layouts.partials.common-scripts')
+
 </html>

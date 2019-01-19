@@ -1,0 +1,97 @@
+@layout('layouts.main')
+
+
+{{--  product.prod_name = prod_name
+    product.prod_patno = prod_patno
+    product.prod_coo = prod_coo
+    product.prod_yom = prod_yom
+    product.prod_quality = prod_quality
+    product.supplier_id = supplier_id
+    product.prod_model = prod_model  --}}
+@section('main')
+
+<div class="row">
+    <div class="col-md-6 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+          <h4 class="card-title">Product #{{product.id}}</h4>
+            
+            <form class="forms-sample" action="{{ route('ProductController.update', { id: product.id }) }}" method="POST">
+              <div class="form-group">
+                <label for="prod_name">Name</label>
+                <input type="text" 
+                        class="form-control" 
+                        id="prod_name" 
+                        placeholder="Name" 
+                        name="prod_name" 
+                        value="{{ product.prod_name }}">
+              </div>
+              <div class="form-group">
+                <label for="prod_patno">Part Number</label>
+              <input type="text" 
+                        class="form-control" 
+                        id="prod_patno" 
+                        name="prod_patno" 
+                        placeholder="Part number" 
+                        value="{{product.prod_patno}}">
+              </div>
+              <div class="form-group">
+                    <label for="prod_model">Model</label>
+                  <input type="text" 
+                            class="form-control" 
+                            id="prod_model" 
+                            name="prod_model" 
+                            placeholder="Modelr" 
+                            value="{{product.prod_model}}">
+                  </div>
+            <div class="form-group">
+                        <label for="prod_quality">Quality State</label>
+                      <input type="text" 
+                                class="form-control" 
+                                id="prod_quality" 
+                                name="prod_quality" 
+                                placeholder="Quality" 
+                                value="{{product.prod_quality}}">
+                      </div>
+              <div class="form-group">
+                    <label for="supplier_id">Supplier</label>
+                    <select class="form-control" id="supplier_id" value="{{product.supplier_id}}">
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                    </select>
+                  </div>
+              <div class="form-group">
+                        <label for="prod_coo">Country of Origin</label>
+                        <input type="text" 
+                        class="form-control" 
+                        id="prod_coo" 
+                        placeholder="Country of Origin"
+                        name="prod_coo" 
+                        value="{{product.prod_coo}}">
+              </div>
+              <div class="form-group">
+                    <label for="prod_yom">Year</label>
+                    <input type="text" 
+                    class="form-control" 
+                    id="prod_yom" 
+                    placeholder="Country of Origin"
+                    name="prod_yom" 
+                    value="{{product.prod_yom}}">
+                  </div>
+              
+        
+              <div class="form-group">
+                <label for="exampleTextarea1">Comments</label>
+                <textarea class="form-control" id="exampleTextarea1" rows="2"></textarea>
+              </div>
+              <button type="submit" class="btn btn-success mr-2">Submit</button>
+              <button class="btn btn-light">Cancel</button>
+            </form>
+          </div>
+        </div>
+      </div>
+</div>
+@endsection
