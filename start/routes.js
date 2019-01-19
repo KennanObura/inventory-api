@@ -18,7 +18,9 @@ const Route = use('Route')
 
 Route.on('/').render('landing')
 Route.on('/register').render('register')
-Route.on('/home').render('index')
+
+
+Route.get('/home', 'DashboardController.dashboardSummary')
 
 Route.post('/auth/register', 'AuthController.register')
 Route.post('/auth/login', 'AuthController.login')
@@ -35,6 +37,7 @@ Route.get('/products', 'ProductController.index')
 Route.get('/products/:id', 'ProductController.show')
 Route.post('/products/:id', 'ProductController.update')
 Route.get('/product/edit/:id', 'ProductController.edit')
+Route.get('/product/create', 'ProductController.create')
 Route.delete('/product/:id', 'ProductController.destroy')
 Route.post('/products', 'ProductController.store')
 Route.get('/product/supplier/:id', 'ProductController.supplier')

@@ -24,3 +24,7 @@ $('#confirm-delete').on('show.bs.modal', function (e) {
     $('.title', this).text(data.recordTitle);
     $('.btn-ok', this).data('recordId', data.recordId);
 });
+
+function loadCreateProduct(){
+    alert('ok')
+}

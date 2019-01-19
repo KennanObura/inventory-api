@@ -5,6 +5,7 @@
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
 const Product = use('App/Models/Product');
+const Suppliers = use('App/Models/Supplier')
 const Database = use('Database')
 
 /**
@@ -34,6 +35,7 @@ class ProductController {
     .select('products.*','suppliers.name')
     .from('products')
     .leftJoin('suppliers', 'suppliers.id', 'products.supplier_id')
+    .orderBy('id')
 
 
     // .whereIn('id', quantity)
@@ -53,6 +55,14 @@ class ProductController {
    * @param {View} ctx.view
    */
   async create({ request, response, view }) {
+
+    const suppliers = await Suppliers.all()
+
+    // return view.render('layouts.products.create', {suppliers : suppliers.toJSON})
+
+    return view.render('layouts.products.create', {suppliers: suppliers.toJSON()})
+    
+
   }
 
   /**
@@ -82,7 +92,7 @@ class ProductController {
     product.prod_model = prod_model
 
     await product.save()
-    return response.json(product)
+    return response.redirect('/products')
 
 
   }
@@ -111,8 +121,9 @@ class ProductController {
   async edit({ params, request, response, view }) {
 
     const product = await Product.find(params.id)
+    const suppliers = await Suppliers.all()
     // return response.json(product)
-    return view.render('layouts.products.edit', {product: product.toJSON()})
+    return view.render('layouts.products.edit', {product: product.toJSON(), suppliers: suppliers.toJSON()})
   }
 
   /**
