@@ -9,7 +9,7 @@
   <div class="row purchace-popup">
         <div class="col-2">
        
-          <a class='btn btn-success btn-block' href="/product/create">
+          <a class='btn btn-success btn-block' href="/products/create/">
             <span >New product<i class="mdi mdi-plus"></i></span></a> 
       </div>
     </div>
@@ -24,7 +24,7 @@
               <table class="table table-hover">
                 <thead>
                   <tr>
-                    <th>ID</th>
+                    
                     <th>Part#</th>
                     <th>Description</th>
                     <th>Model</th>
@@ -37,11 +37,11 @@
                   </tr>
                 </thead>
                 <tbody>
-                    @each(product in products)
+                    @each(product in products.data)
                   
                
                     <tr id="{{product.id}}">
-                        <td>{{product.id}}</td> 
+                        
                         <td>{{product.prod_patno}}</td>
                         <td>{{product.prod_name}}</td>
                         
@@ -63,8 +63,30 @@
                       </tr>
                       @endeach
                 </tbody>
+                
               </table>
             </div>
+           
+                <div class="row">
+                 <div class="col-md-8">
+                    <div class="pagination">
+                <a class="btn btn-xs" href="/products/page/{{(products.page-1) > 0 ? (products.page-1) : 1 }}">« Prev</a>
+                @each(page in range(products.lastPage))
+                  
+                  @if(page+1 == products.page)
+                  <a class="active btn btn-xs" href="/products/page/{{page+1}}">{{page+1}}</a>
+                  @else
+                  <a class="btn btn-xs" href="/products/page/{{page+1}}">{{page+1}}</a>
+                  @endif
+                @endeach
+                <a class="btn btn-xs" href="/products/page/{{products.page+1}}">Next »</a>
+                    </div>
+                      <p> Page No.: {{products.page}} of ({{products.lastPage}}) Pages. 
+                      | {{(products.page === products.lastPage) ? products.lastPage : products.perPage}} of ({{products.total}}) items. </p>
+                   </div>  
+                   
+                </div>
+            
           </div>
         </div>
       </div>

@@ -21,7 +21,9 @@ class ProductController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async index({ request, response, view }) {
+  async index({ request, response, view, params }) {
+
+    let page = params.page ? params.page : 1;
 
     // const quantity =  await Database
     // .select('stock')
@@ -35,7 +37,8 @@ class ProductController {
     .select('products.*','suppliers.name')
     .from('products')
     .leftJoin('suppliers', 'suppliers.id', 'products.supplier_id')
-    .orderBy('id')
+    .orderBy('id', 'Desc')
+    .paginate(page, 5)
 
 
     // .whereIn('id', quantity)
@@ -58,7 +61,7 @@ class ProductController {
 
     const suppliers = await Suppliers.all()
 
-    // return view.render('layouts.products.create', {suppliers : suppliers.toJSON})
+  // return response.json('suppliers')
 
     return view.render('layouts.products.create', {suppliers: suppliers.toJSON()})
     
@@ -92,7 +95,7 @@ class ProductController {
     product.prod_model = prod_model
 
     await product.save()
-    return response.redirect('/products')
+    return response.redirect('/products/page/?')
 
 
   }

@@ -1,13 +1,6 @@
 @layout('layouts.main')
 
 
-{{--  product.prod_name = prod_name
-    product.prod_patno = prod_patno
-    product.prod_coo = prod_coo
-    product.prod_yom = prod_yom
-    product.prod_quality = prod_quality
-    product.supplier_id = supplier_id
-    product.prod_model = prod_model  --}}
 @section('main')
 
 <div class="row">
@@ -17,6 +10,7 @@
           <h4 class="card-title">New Product</h4>
             
             <form class="forms-sample" action="{{ route('ProductController.store') }}" method="POST">
+                    {{ csrfField() }}
               <div class="form-group">
                 <label for="prod_name">Name</label>
                 <input type="text" 
@@ -26,6 +20,12 @@
                         name="prod_name" 
                         value="">
               </div>
+              @if(hasErrorFor('prod_name'))
+                          <span>
+                              {{ getErrorFor('prod_name') }}
+                          </span>
+                      @endif
+
               <div class="form-group">
                 <label for="prod_patno">Part Number</label>
               <input type="text" 
@@ -35,6 +35,11 @@
                         placeholder="Part number" 
                         value="">
               </div>
+              @if(hasErrorFor('prod_patno'))
+              <span>
+                  {{ getErrorFor('prod_patno') }}
+              </span>
+          @endif
               <div class="form-group">
                     <label for="prod_model">Model</label>
                   <input type="text" 
@@ -44,6 +49,11 @@
                             placeholder="Modelr" 
                             value="">
                   </div>
+                  @if(hasErrorFor('prod_model'))
+              <span>
+                  {{ getErrorFor('prod_model') }}
+              </span>
+          @endif
             <div class="form-group">
                         <label for="prod_quality">Quality State</label>
                       <input type="text" 
@@ -53,6 +63,11 @@
                                 placeholder="Quality" 
                                 value="">
                       </div>
+                      @if(hasErrorFor('prod_quality'))
+              <span>
+                  {{ getErrorFor('prod_quality') }}
+              </span>
+          @endif
               <div class="form-group">
                     <label for="supplier_id">Supplier</label>
                     <select class="form-control" id="supplier_id" value="" name="supplier_id">
@@ -62,6 +77,11 @@
                       
                     </select>
                   </div>
+                  @if(hasErrorFor('supplier_id'))
+              <span>
+                  {{ getErrorFor('supplier_id') }}
+              </span>
+          @endif
               <div class="form-group">
                         <label for="prod_coo">Country of Origin</label>
                         <input type="text" 
@@ -71,6 +91,11 @@
                         name="prod_coo" 
                         value="">
               </div>
+              @if(hasErrorFor('prod_coo'))
+              <span>
+                  {{ getErrorFor('prod_coo') }}
+              </span>
+          @endif
               <div class="form-group">
                     <label for="prod_yom">Year</label>
                     <input type="text" 
@@ -80,7 +105,11 @@
                     name="prod_yom" 
                     value="">
                   </div>
-              
+                  @if(hasErrorFor('prod_yom'))
+                  <span>
+                      {{ getErrorFor('prod_yom') }}
+                  </span>
+              @endif
         
               <div class="form-group">
                 <label for="exampleTextarea1">Comments</label>

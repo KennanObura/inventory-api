@@ -25,6 +25,3 @@ $('#confirm-delete').on('show.bs.modal', function (e) {
     $('.btn-ok', this).data('recordId', data.recordId);
 });
 
-function loadCreateProduct(){
-    alert('ok')
-}

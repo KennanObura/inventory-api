@@ -19,7 +19,8 @@ class DashboardController {
         const summary = ({
             productCount : productCount,
             supplierCount : supplierCount,
-            userCount : userCount
+            userCount : userCount,
+            user : auth.user
         })
 
 

@@ -24,6 +24,7 @@ Route.get('/home', 'DashboardController.dashboardSummary')
 
 Route.post('/auth/register', 'AuthController.register')
 Route.post('/auth/login', 'AuthController.login')
+Route.get('/auth/logout', 'AuthController.logout')
 
 Route.get('/suppliers', 'SupplierController.index')
 Route.get('/suppliers/:id', 'SupplierController.show')
@@ -33,14 +34,16 @@ Route.delete('/suppliers/:id', 'SupplierController.destroy').middleware('auth')
 Route.get('/suppliers/products/:id', 'SupplierController.products')
 
 
-Route.get('/products', 'ProductController.index')
-Route.get('/products/:id', 'ProductController.show')
-Route.post('/products/:id', 'ProductController.update')
+Route.get('/product/:id', 'ProductController.show')
 Route.get('/product/edit/:id', 'ProductController.edit')
-Route.get('/product/create', 'ProductController.create')
+Route.get('/products/create/', 'ProductController.create')
 Route.delete('/product/:id', 'ProductController.destroy')
-Route.post('/products', 'ProductController.store')
 Route.get('/product/supplier/:id', 'ProductController.supplier')
+
+Route.get('/products/page/:page?', 'ProductController.index')
+Route.post('/products/:id', 'ProductController.update')
+Route.post('/products', 'ProductController.store')
+
 
 Route.get('/api/productQuantity', 'ProductQuantityController.index')
 Route.post('/api/productQuantity', 'ProductQuantityController.store')
