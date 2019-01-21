@@ -27,25 +27,29 @@ class AuthController {
 
 
     async login({request, auth, response, view, session}){
-        const email = request.input('email')
-        const password = request.input('password')
+        // const email = request.input('email')
+        // const password = request.input('password')
 
-        try {
-            if(await auth.attempt(email, password)){
-                let user = await User.findBy('email', email)
+        // try {
+        //     if(await auth.attempt(email, password)){
+        //         let user = await User.findBy('email', email)
 
-                let accessToken = await auth.generate(user)
+        //         let accessToken = await auth.generate(user)
 
-                session.flash({successMessage: 'Login success'})
-                return response.route('/home');
+        //         session.flash({successMessage: 'Logged in successfully'})
+        //         return response.route('/home');
                 
-                // return response.json({ user: user, access_token: accessToken })
-            }
+        //         // return response.json({ user: user, access_token: accessToken })
+        //     }
    
-        } catch (error) {
-            return response.redirect('/');
-        }
+        // } catch (error) {
+        //     return response.redirect('/');
+        // }
         
+        const {email, password} = request.all();
+        let token = await auth.attempt(email, password)
+        // return response.status(200).json({data: token, message: 'Login successfull', status: true});
+        return response.route('/home');
     }
 
     async logout({request, auth, response}){

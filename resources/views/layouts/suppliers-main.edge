@@ -3,13 +3,13 @@
 
   @section('main')
 
+
   <div class="row purchace-popup">
-      <div class="col-2">
-      <button class="btn btn-success btn-block">New Supplier
-          <i class="mdi mdi-plus"></i>
-        </button>
-    </div>
+    <div class="col-2">
+      <a class='btn btn-success btn-block' href="/supplier/create/">
+        <span >New Supplier<i class="mdi mdi-plus"></i></span></a> 
   </div>
+</div>
 
   <div class="row">
       <div class="col-lg-12 grid-margin stretch-card">
@@ -30,7 +30,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                @each(supplier in suppliers)
+                @each(supplier in suppliers.data)
                   
                
                 <tr id="{{supplier.id}}">
@@ -49,6 +49,25 @@
                 </tbody>
               </table>
             </div>
+            <div class="row">
+              <div class="col-md-8">
+                 <div class="pagination">
+             <a class="btn btn-xs" href="/suppliers/page/{{(suppliers.page-1) > 0 ? (suppliers.page-1) : 1 }}">« Prev</a>
+             @each(page in range(suppliers.lastPage))
+               
+               @if(page+1 == suppliers.page)
+               <a class="active btn btn-xs" href="/suppliers/page/{{page+1}}">{{page+1}}</a>
+               @else
+               <a class="btn btn-xs" href="/suppliers/page/{{page+1}}">{{page+1}}</a>
+               @endif
+             @endeach
+             <a class="btn btn-xs" href="/suppliers/page/{{suppliers.page+1}}">Next »</a>
+                 </div>
+                   <p> Page No.: {{suppliers.page}} of ({{suppliers.lastPage}}) Pages. 
+                   | {{(suppliers.page === suppliers.lastPage) ? suppliers.lastPage : suppliers.perPage}} of ({{suppliers.total}}) items. </p>
+                </div>  
+                
+             </div>
           </div>
         </div>
       </div>
