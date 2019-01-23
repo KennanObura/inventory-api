@@ -10,7 +10,7 @@ class DashboardController {
 
     }
 
-    async dashboardSummary({params, request, auth, response, view}){
+    async dashboardSummary({params, request, auth, response, view, session}){
 
         let productCount = await Products.getCount();
         let supplierCount = await Suppliers.getCount();
@@ -20,9 +20,11 @@ class DashboardController {
             productCount : productCount,
             supplierCount : supplierCount,
             userCount : userCount,
-            user : auth.user
+            user : auth.username
         })
 
+        // console.log(auth)
+        // return response.json(summary)
 
 
         return view.render('index', {summary: summary})

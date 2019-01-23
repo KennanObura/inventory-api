@@ -42,6 +42,7 @@ const namedMiddleware = {
   guest: 'Adonis/Middleware/AllowGuestOnly'
 }
 
+
 /*
 |--------------------------------------------------------------------------
 | Server Middleware
