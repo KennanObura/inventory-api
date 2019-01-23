@@ -39,7 +39,7 @@ class AuthController {
             // return response.json({ token: token })
             session.flash({ successMessage: 'Login success' })
 
-            response.setHeader('Authorization', 'Bearer '+ token)
+            // response.setHeader('Authorization', 'Bearer '+ token)
             return response.route('/home');
             // response-headers->set('Authorization', 'Bearer '.$request->bearerToken());
 

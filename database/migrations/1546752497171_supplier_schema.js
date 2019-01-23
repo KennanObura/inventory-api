@@ -9,7 +9,7 @@ class SupplierSchema extends Schema {
       table.increments()
       table.string('name')
       table.string('address')
-      table.string('coo')
+      table.string('comments')
       table.string('city')
       table.string('tel')
       table.timestamps()

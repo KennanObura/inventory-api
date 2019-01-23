@@ -1,0 +1,84 @@
+@layout('layouts.main')
+
+
+@section('main')
+
+<div class="row">
+    <div class="col-md-6 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+          <h4 class="card-title">New Suppliers</h4>
+            
+            <form class="forms-sample" action="{{ route('SupplierController.store') }}" method="POST">
+                    {{ csrfField() }}
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" 
+                        class="form-control" 
+                        id="name" 
+                        placeholder="Name" 
+                        name="name" 
+                        value="">
+              </div>
+              @if(hasErrorFor('name'))
+                          <span>
+                              {{ getErrorFor('name') }}
+                          </span>
+                      @endif
+
+              <div class="form-group">
+                <label for="address">Address</label>
+              <input type="text" 
+                        class="form-control" 
+                        id="address" 
+                        name="address" 
+                        placeholder="Address" 
+                        value="">
+              </div>
+              @if(hasErrorFor('address'))
+              <span>
+                  {{ getErrorFor('address') }}
+              </span>
+          @endif
+              <div class="form-group">
+                    <label for="tel">Telephone</label>
+                  <input type="text" 
+                            class="form-control" 
+                            id="tel" 
+                            name="tel" 
+                            placeholder="Telephone" 
+                            value="">
+                  </div>
+                  @if(hasErrorFor('tel'))
+              <span>
+                  {{ getErrorFor('tel') }}
+              </span>
+          @endif
+            <div class="form-group">
+                        <label for="city">City</label>
+                      <input type="text" 
+                                class="form-control" 
+                                id="city" 
+                                name="city" 
+                                placeholder="City" 
+                                value="">
+                      </div>
+                      @if(hasErrorFor('city'))
+              <span>
+                  {{ getErrorFor('city') }}
+              </span>
+          @endif
+              
+        
+              <div class="form-group">
+                <label for="comments">Comments</label>
+                <textarea class="form-control" id="comments" name="comments" placeholder="Additional comments" rows="2"></textarea>
+              </div>
+              <button type="submit" class="btn btn-success mr-2">Submit</button>
+              <button class="btn btn-light">Cancel</button>
+            </form>
+          </div>
+        </div>
+      </div>
+</div>
+@endsection

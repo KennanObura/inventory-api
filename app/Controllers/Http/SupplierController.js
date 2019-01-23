@@ -7,6 +7,7 @@
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
 const Supplier = use('App/Models/Supplier');
+const Database = use('Database')
 
 /**
  * Resourceful controller for interacting with suppliers
@@ -21,13 +22,17 @@ class SupplierController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async index({ request, response, view }) {
+  async index({ request, response, view, params }) {
 
-    
-    let suppliers = await Supplier.all()
+    let page = params.page? params.page : 1
+    let suppliers =  await Database
+    .select('*')
+    .from('suppliers')
+    .orderBy('id', 'Desc')
+    .paginate(page, 5)
 
     // return response.json(suppliers)
-    return view.render('layouts.suppliers-main', { suppliers: suppliers.toJSON() })
+    return view.render('layouts.suppliers-main', { suppliers: suppliers })
     
   }
 
@@ -42,6 +47,8 @@ class SupplierController {
    */
   async create({ request, response, view }) {
 
+    return view.render('layouts.suppliers.create')
+
   }
 
   /**
@@ -52,10 +59,10 @@ class SupplierController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async store({ request, response }) {
+  async store({ request, response, auth, session }) {
     const name = request.input('name')
     const address = request.input('address')
-    const coo = request.input('coo')
+    const comments = request.input('comments')
     const city = request.input('city')
     const tel = request.input('tel')
     const user_id = request.input('user_id')
@@ -64,12 +71,12 @@ class SupplierController {
     supplier.name = name
     supplier.city = city
     supplier.address = address
-    supplier.coo = coo
+    supplier.comments = comments
     supplier.tel = tel
-    supplier.user_id = user_id
+    supplier.user_id = 1
 
     await supplier.save()
-    return response.json(supplier)
+    return response.route('/suppliers/page/')
   }
 
   /**
