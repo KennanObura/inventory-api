@@ -33,23 +33,29 @@ Route.group(() => {
     Route.get('suppliers/:id', 'SupplierController.show')
     Route.post('suppliers', 'SupplierController.store')
     Route.put('suppliers/:id', 'SupplierController.update')
-    Route.delete('suppliers/:id', 'SupplierController.destroy').middleware('auth')
+    Route.delete('suppliers/:id', 'SupplierController.destroy')
     Route.get('suppliers/products/:id', 'SupplierController.products')
-}).prefix('api/v1').middleware(['auth'])
+    // Route.get('suppliers/')
+}).prefix('api/v1')
+// .middleware(['auth'])
 
 
 Route.group(() => {
-    Route.get('/product/:id', 'ProductController.show')
-    Route.get('/product/edit/:id', 'ProductController.edit')
-    Route.get('/products/create/', 'ProductController.create')
-    Route.delete('/product/:id', 'ProductController.destroy')
-    Route.get('/product/supplier/:id', 'ProductController.supplier')
+    Route.get('product/:id', 'ProductController.show')
+    Route.get('product/edit/:id', 'ProductController.edit')
+    Route.get('products/create/', 'ProductController.create')
+    Route.delete('product/:id', 'ProductController.destroy')
+    Route.get('product/supplier/:id', 'ProductController.supplier')
 
-    Route.get('/products/page/:page?', 'ProductController.index')
-    Route.post('/products/:id', 'ProductController.update')
-    Route.post('/products', 'ProductController.store')
-}).prefix('api/v1').middleware(['auth'])
+    Route.get('products/page/:page?', 'ProductController.index')
+    Route.post('products/:id', 'ProductController.update')
+    Route.post('products', 'ProductController.store')
+}).prefix('api/v1')
+// .middleware(['auth'])
 
-Route.get('/api/productQuantity', 'ProductQuantityController.index')
-Route.post('/api/productQuantity', 'ProductQuantityController.store')
-Route.put('/api/productQuantity/:id', 'ProductQuantityController.update')
+Route.group(() => {
+    Route.get('products/quantity', 'ProductQuantityController.index')
+    Route.post('products/quantity', 'ProductQuantityController.store')
+    Route.put('products/uantity/:id', 'ProductQuantityController.update')
+}).prefix('api/v1')
+

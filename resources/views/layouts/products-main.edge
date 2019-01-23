@@ -70,16 +70,16 @@
                 <div class="row">
                  <div class="col-md-8">
                     <div class="pagination">
-                <a class="btn btn-xs" href="/products/page/{{(products.page-1) > 0 ? (products.page-1) : 1 }}">« Prev</a>
+                <a class="btn btn-xs" href="{{ route('ProductController.index', { page: (products.page-1) > 0 ? (products.page-1) : 1 }) }}">« Prev</a>
                 @each(page in range(products.lastPage))
                   
                   @if(page+1 == products.page)
-                  <a class="active btn btn-xs" href="/products/page/{{page+1}}">{{page+1}}</a>
+                  <a class="active btn btn-xs" href="{{ route('ProductController.index', { page: page+1 }) }}">{{page+1}}</a>
                   @else
-                  <a class="btn btn-xs" href="/products/page/{{page+1}}">{{page+1}}</a>
+                  <a class="btn btn-xs" href="{{ route('ProductController.index', { page: page+1 }) }}">{{page+1}}</a>
                   @endif
                 @endeach
-                <a class="btn btn-xs" href="/products/page/{{products.page+1}}">Next »</a>
+                <a class="btn btn-xs" href="{{ route('ProductController.index', { page: products.page+1 }) }} ">Next »</a>
                     </div>
                       <p> Page No.: {{products.page}} of ({{products.lastPage}}) Pages. 
                       | {{(products.page === products.lastPage) ? products.lastPage : products.perPage}} of ({{products.total}}) items. </p>

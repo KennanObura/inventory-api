@@ -32,14 +32,15 @@ class AuthController {
         const parameter = request.only(['email', 'password'])
 
         try {
-            if (!parameter)
+            if (!parameter)//check if user inputs provided
                 return response.status(404).json({ data: 'Resource not found' })
 
+            //assign user token
             const token = await auth.attempt(parameter.email, parameter.password)
-            // return response.json({ token: token })
+         
             session.flash({ successMessage: 'Login success' })
 
-            response.setHeader('Authorization', 'Bearer '+ token)
+            response.setHeader('Authorization', 'Bearer ' + token)
             return response.route('/home');
             // response-headers->set('Authorization', 'Bearer '.$request->bearerToken());
 

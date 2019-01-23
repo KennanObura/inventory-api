@@ -27,26 +27,42 @@
       <li class="nav-item">
         <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
           <i class="menu-icon mdi mdi-content-copy"></i>
-          <span class="menu-title">Basic UI Elements</span>
+          <span class="menu-title">Products</span>
           <i class="menu-arrow"></i>
         </a>
         <div class="collapse" id="ui-basic">
           <ul class="nav flex-column sub-menu">
             <li class="nav-item">
-              <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a>
+              <a class="nav-link" href="{{ route('ProductController.index', { page: 1 }) }}">Inventory</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="pages/ui-features/typography.html">Typography</a>
+              <a class="nav-link" href="{{ route('ProductQuantityController.index') }}">Product Quantity</a>
             </li>
           </ul>
         </div>
       </li>
+
       <li class="nav-item">
-        <a class="nav-link" href="/products/page/">
-          <i class="menu-icon mdi mdi-backup-restore"></i>
-          <span class="menu-title">Products</span>
-        </a>
-      </li>
+          <a class="nav-link" data-toggle="collapse" href="#ui-supplier" aria-expanded="false" aria-controls="ui-basic">
+            <i class="menu-icon mdi mdi-table"></i>
+            <span class="menu-title">Suppliers</span>
+            <i class="menu-arrow"></i>
+          </a>
+          <div class="collapse" id="ui-supplier">
+            <ul class="nav flex-column sub-menu">
+              <li class="nav-item">
+                <a class="nav-link" href="{{ route('SupplierController.index', { page: 1 }) }}">Inventory</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ route('SupplierController.transaction') }}">Transactions</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="{{ route('SupplierController.starred') }}">Star</a>
+                </li>
+            </ul>
+          </div>
+        </li>
+      
       <li class="nav-item">
         <a class="nav-link" href="/sales">
           <i class="menu-icon mdi mdi-chart-line"></i>
@@ -54,18 +70,12 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/suppliers/page/?">
+        <a class="nav-link" href="{{ route('SupplierController.index', { page: 1 }) }}">
           <i class="menu-icon mdi mdi-table"></i>
           <span class="menu-title">Suppliers</span>
         </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/users">
-          <i class="menu-icon mdi mdi-sticker"></i>
-          <span class="menu-title">Users</span>
-        </a>
-      </li>
-     
+      
     </ul>
   </nav>
   <!-- partial -->
